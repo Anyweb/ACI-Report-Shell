@@ -49,6 +49,7 @@ if ignore_https_cert == "true":
 
 # Set log variables
 log_file = read_config(section="logging", setting="log_file")
+log_level = read_config(section="logging", setting="log_level")
 log_rotation = read_config(section="logging", setting="log_rotation")
 log_backup = read_config(section="logging", setting="log_backup")
 
@@ -65,4 +66,4 @@ logger.addHandler(log_handler)
 logger.setLevel(logging.INFO)
 
 # Set parameters for coloredlogs output
-coloredlogs.install(level="INFO", fmt="%(name)s %(levelname)s %(message)s")
+coloredlogs.install(level=log_level, fmt="%(name)s %(levelname)s %(message)s")
