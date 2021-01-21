@@ -48,10 +48,9 @@ if ignore_https_cert == "true":
     urllib3.disable_warnings()
 
 # Set log variables
-logfile = "./logs/application.log"
-log_file = logfile
-log_rotation = "W1"
-log_backup = 25
+log_file = read_config(section="logging", setting="log_file")
+log_rotation = read_config(section="logging", setting="log_rotation")
+log_backup = read_config(section="logging", setting="log_backup")
 
 # Instantiate rotating log
 log_handler = TimedRotatingFileHandler(
