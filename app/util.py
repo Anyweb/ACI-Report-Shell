@@ -8,7 +8,7 @@ import urllib3
 
 
 def read_config(section, setting):
-    """ Read config.ini configuration file from project
+    """Read config.ini configuration file from project
         root directory
 
     Args:

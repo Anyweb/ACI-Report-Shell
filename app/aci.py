@@ -18,14 +18,13 @@ url = None
 
 
 def set_apic_url():
-    """ Generate APIC API URL from user input
-    """
+    """Generate APIC API URL from user input"""
     global url
     url = "https://" + input("Enter APIC FQDN: ") + "/api/"
 
 
 def apic_login(username):
-    """ Login to APIC and quire authentication toke for further API requests
+    """Login to APIC and quire authentication toke for further API requests
 
     Args:
         username (str): Username for APIC login
@@ -59,7 +58,7 @@ def apic_login(username):
 
 
 def apic_logout(session):
-    """ Logout from APIC
+    """Logout from APIC
 
     Args:
         session (obj): Authentication session from APIC login
@@ -87,7 +86,7 @@ def apic_logout(session):
 
 
 def show_epg_all(session):
-    """ Show all EPGs from all Tenants
+    """Show all EPGs from all Tenants
 
     Args:
         session (obj): Authentication Session from APIC login
