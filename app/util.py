@@ -9,15 +9,15 @@ import urllib3
 
 
 def read_config(section, setting):
-    """ Read configuration file
+    """ Read config.ini configuration file from project
+        root directory
 
     Args:
-        section : (str) name of section in config.ini
-        setting : (str) name of setting in section
+        section (str): name of section
+        setting (str): name of setting
 
     Returns:
-        Configuration parameter
-
+        str: configuration parameter
     """
     parser = configparser.SafeConfigParser()
     parser.read("config.ini")
