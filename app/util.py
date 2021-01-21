@@ -59,7 +59,9 @@ def check_session(session):
 
 # Disable unverified HTTPS request warnings
 # -> https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
-urllib3.disable_warnings()
+ignore_https_cert = read_config(section="common", setting="ignore_https_certificate")
+if ignore_https_cert == "true":
+    urllib3.disable_warnings()
 
 # Set log variables
 logfile = "./logs/application.log"
