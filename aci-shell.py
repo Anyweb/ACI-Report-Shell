@@ -53,6 +53,20 @@ class ACIshell(cmd2.Cmd):
         app.util.check_session(session)
         app.aci.apic_logout(session)
 
+    # -------------------------------------------------------------------------
+    # Section for show commands
+
+    # show epg all
+    show_epg_all_parser = argparse.ArgumentParser()
+    show_epg_all_args = show_epg_all_parser.parse_args()
+
+    @cmd2.with_argparser(show_epg_all_parser)
+    def do_show_epg_all(self, args):
+        """ Show all EPGs from all tenants"""
+        global session
+        app.util.check_session(session)
+        app.aci.show_epg_all(session)
+
 
 if __name__ == "__main__":
     application = ACIshell()
