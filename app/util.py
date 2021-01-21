@@ -26,14 +26,13 @@ def read_config(section, setting):
 
 
 def check_session(session):
-    """ Check if connection sessions exists
+    """Check if connection session to APIC exists
 
     Args:
-        session : (obj) Request session object for further API calls
-                        Can be empty
+        session (obj): Request session object for further API calls
 
     Returns:
-        Message if not connected to APIC
+        CLI / Log error message
     """
     if session is None:
         logger.warning("Connection session with APIC missing")
