@@ -140,3 +140,7 @@ cython_debug/
 # Custom
 .venv
 .envrc
+
+# Exclude runtime directories
+/logs/*
+!/logs/.gitkeep
