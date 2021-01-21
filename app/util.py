@@ -25,20 +25,6 @@ def read_config(section, setting):
     return config
 
 
-def save_json(folder, file, data):
-    """ Sava data as JSON file
-
-    Args:
-        folder : (str) name of folder
-        file : (str) name of file
-        data : (str) content of file
-
-    """
-    file = open(os.path.join(folder, file + ".json"), "w")
-    file.write(data)
-    file.close()
-
-
 def check_session(session):
     """ Check if connection sessions exists
 
