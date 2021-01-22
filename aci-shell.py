@@ -6,6 +6,7 @@ import sys
 import time
 
 import cmd2
+from requests.models import guess_filename
 
 import app.util
 import app.aci
@@ -74,6 +75,45 @@ class ACIshell(cmd2.Cmd):
             app.aci.show_epg_all(session=session, filename=filename)
         else:
             app.aci.show_epg_all(session=session, filename="")
+
+    # show interface status
+    show_interface_status_parser = argparse.ArgumentParser()
+    show_interface_status_parser.add_argument(
+        "-e", "--export", dest="filename", help="export report to file"
+    )
+    show_interface_status_parser.add_argument(
+        "-p", "--pod-id", dest="pod_id", help="POD-ID"
+    )
+    show_interface_status_parser.add_argument(
+        "-n", "--node-id", dest="node_id", help="Node-ID"
+    )
+    show_interface_status_args = show_interface_status_parser.parse_args()
+
+    @cmd2.with_argparser(show_interface_status_parser)
+    def do_show_interface_status(self, args):
+        """ Show interface status for fabric node """
+        global session
+        app.util.check_session(session)
+        if args.pod_id or args.node_id is not None:
+            pod_id = args.pod_id
+            node_id = args.node_id
+            if args.filename is not None:
+                report_dir = app.util.read_config(
+                    section="common", setting="report_dir"
+                )
+                filename = report_dir + args.filename
+                app.aci.show_interface_status(
+                    session=session, pod_id=pod_id, node_id=node_id, filename=filename
+                )
+            else:
+                app.aci.show_interface_status(
+                    session=session, pod_id=pod_id, node_id=node_id, filename=""
+                )
+        else:
+            print(
+                "Error: pod-id and node-id arguements are required \n"
+                'Example: "show_interface_status -p 1 -n 201"'
+            )
 
 
 if __name__ == "__main__":

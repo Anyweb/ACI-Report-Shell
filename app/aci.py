@@ -136,3 +136,74 @@ def show_epg_all(session, filename):
     except requests.exceptions.HTTPError as error:
         app.util.logger.error("HTTP error: " + str(error))
         app.util.logger.error("Data reported by APIC: " + str(api_call.text))
+
+
+def show_interface_status(session, pod_id, node_id, filename):
+    """Show interface status for all interfaces on a switch
+
+    Args:
+        session : (obj) Authentication session from APIC login
+        pod_id : (str) POD-ID of switch
+        node_id : (str) Node-ID of switch
+        filename (str): Filename for export
+    """
+    global url
+    api_url = (
+        url
+        + "node/class/topology/pod-"
+        + pod_id
+        + "/node-"
+        + node_id
+        + "/l1PhysIf.json?&rsp-subtree=children"
+        + "&rsp-subtree-class=ethpmPhysIf&order-by=l1PhysIf.id"
+    )
+    try:
+        api_call = session.get(api_url, verify=False)
+        app.util.logger.info("Getting interface status for node " + node_id)
+        api_call.raise_for_status()
+        api_data = json.loads(api_call.text)
+        data = []
+        for imdata in api_data["imdata"]:
+            attributes = imdata["l1PhysIf"]["attributes"]
+            interface_id = attributes["id"]
+            descr = attributes["descr"]
+            adminSt = attributes["adminSt"]
+            for children in imdata["l1PhysIf"]["children"]:
+                attributes = children["ethpmPhysIf"]["attributes"]
+                operSt = attributes["operSt"]
+                operSpeed = attributes["operSpeed"]
+                operStQual = attributes["operStQual"]
+                operDuplex = attributes["operDuplex"]
+                bundleIndex = attributes["bundleIndex"]
+            data.append(
+                {
+                    "Port": interface_id,
+                    "Description": descr,
+                    "Admin State": adminSt,
+                    "Oper. State": operSt,
+                    "Oper. Reason": operStQual,
+                    "Duplex": operDuplex,
+                    "Speed": operSpeed,
+                    "Port-Channel": bundleIndex,
+                }
+            )
+        columns = [
+            "Port",
+            "Description",
+            "Port-Channel",
+            "Admin State",
+            "Oper. State",
+            "Oper. Reason",
+            "Speed",
+            "Duplex",
+        ]
+        dataframe = pandas.DataFrame(data, columns=columns)
+        print(dataframe.to_string(index=False, justify="right", col_space=8))
+        if filename != "":
+            sheet_name = "interface status_" + pod_id + "_" + node_id
+            app.util.pd_write_excel(
+                filename=filename, data=dataframe, sheet_name=sheet_name
+            )
+    except requests.exceptions.HTTPError as error:
+        app.util.logger.error("HTTP error: " + str(error))
+        app.util.logger.error("Data reported by APIC: " + str(api_call.text))
