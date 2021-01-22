@@ -31,7 +31,7 @@ The main dependencies are:
 
 If [Pipenv](https://pipenv.pypa.io/en/latest/) is available on your system, you can install the software as follows:
 
-```bash
+```cli
 pipenv install
 chmod +x ./aci-shell.py
 ```
@@ -40,7 +40,7 @@ chmod +x ./aci-shell.py
 
 Otherwise you can use [Pip](https://pip.pypa.io/en/stable/user_guide/#) to install the software as follows:
 
-```bash
+```cli
 pip install -r requirements.txt
 chmod +x ./aci-shell.py
 ```
@@ -60,15 +60,15 @@ Some aspects of the application can be configured in the [config.ini](./config.i
 
 ## Usage
 
-To start the application simply open a terminal window an run **aci-shell.py**
+To start the application simply open a terminal window and run **aci-shell.py**
 
-```bash
+```cli
 $ ./aci-shell.py
 ```
 
-You will the be asked to enter the FQDN of your APIC.
+You will then be asked to enter the FQDN of your APIC.
 
-```bash
+```cli
 Enter APIC FQDN: sandboxapicdc.cisco.com
 ```
 
@@ -85,19 +85,19 @@ Please login with "connect -u [username]"
 Since the application is using [cmd2](https://github.com/python-cmd2/cmd2) as the CLI, you can use the built-in features such as:
 
 -   tab completion of commands
--   show help for a command (-h or --help)
--   Searchable command history (history command and <Ctrl>+r)
--   Pipe command output to shell commands with |
--   Redirect command output to file with >, >>
+-   show help for a command (**-h** or **--help** command)
+-   Searchable command history (**history** and **Ctrl+r** command)
+-   Pipe command output to shell commands with **|**
+-   Redirect command output to file with **>**, **>>**
 -   Command aliasing similar to bash alias command
 
 ### Connect to APIC
 
-To establish a connection to the APIC use the **connect** command and provide the username with the **-u** argument.
+To establish a connection to the APIC, use the **connect** command and provide the username with the **-u** argument.
 
 You will then be asked to enter the password for the user.
 
-```bash
+```cli
 >>> connect -u admin
 APIC URL: https://sandboxapicdc.cisco.com/api/
 Enter password for user admin:
@@ -107,23 +107,23 @@ Enter password for user admin:
 
 To disconnect from the APIC you can use the **disconnect** command.
 
-```bash
+```cli
 >>> disconnect
 ```
 
 ### Show all EPGs in all Tenants
 
-For a report of all EPGs in all Tenants use the **show_epg_all** command.
+For a report of all EPGs in all Tenants, use the **show_epg_all** command.
 
-```bash
+```cli
 >>> show_epg_all
 ```
 
 ### Show interface status of a switch
 
-For a report on the interface status of a switch use the **\*show_interface_status** command.
+For a report on the interface status of a switch, use the **show_interface_status** command.
 
-```bash
+```cli
 >>> show_interface_status -p 1 -n 101
 ```
 
@@ -133,7 +133,7 @@ Every report can be exported to an Excel spreadsheet. Simply add the **-e** or *
 
 **_Example:_**
 
-```bash
+```cli
 >>> show_epg_all --export aci-report.xlsx
 ```
 
