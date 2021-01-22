@@ -2,7 +2,7 @@
 
 Interactive shell application to gather information generate reports from a Cisco ACI environment.
 
-![./assets/aci-shell.png]()
+![ACI-Shell Screenshot](./assets/aci-shell.png)
 
 ## Use Case Description
 
@@ -49,14 +49,14 @@ chmod +x ./aci-shell.py
 
 Some aspects of the application can be configured in the [config.ini](./config.ini) file. The following settings are available:
 
-| Section  | Setting                  | Default                     | Description                                                                              |
-| -------- | ------------------------ | --------------------------- | ---------------------------------------------------------------------------------------- |
-| common   | report_dir               | ./reports                   | Path to report directory                                                                 |
-| security | ignore_https_certificate | true                        | Allow unverified HTTPS requests                                                          |
-| logging  | log_file                 | ./logs/aci-report-shell.log | Path to logfile                                                                          |
-| logging  | log_level                | Info                        | Logging level. <br> Allowed values: DEBUG, INFO, WARNING, ERROR, CRITICAL                |
-| logging  | log_rotation             | W0                          | Weekday when new logfile will be written <br> Allowed values: W0 - W6, where W0 = Monday |
-| logging  | log_backup               | 25                          | Number of log files which will be kept before they get deleted                           |
+| Section  | Setting                  | Default                     | Description                                                                                      |
+| -------- | ------------------------ | --------------------------- | ------------------------------------------------------------------------------------------------ |
+| common   | report_dir               | ./reports                   | Path to report directory                                                                         |
+| security | ignore_https_certificate | true                        | Allow unverified HTTPS requests                                                                  |
+| logging  | log_file                 | ./logs/aci-report-shell.log | Path to logfile                                                                                  |
+| logging  | log_level                | Info                        | Logging level. <br> Allowed values: **DEBUG**, **INFO**, **WARNING**, **ERROR**, **CRITICAL**    |
+| logging  | log_rotation             | W0                          | Weekday when new logfile will be written <br> Allowed values: **W0** - **W6**, where W0 = Monday |
+| logging  | log_backup               | 25                          | Number of log files which will be kept before they get deleted                                   |
 
 ## Usage
 
@@ -139,7 +139,7 @@ Every report can be exported to an Excel spreadsheet. Simply add the **-e** or *
 
 By default the report will be saved to the **./reports** directory.
 
-![./assets/excel.png]()
+![Excel Screenshot](./assets/excel.png)
 
 You can save multiple reports to the same file. Simply use the same filename in the **-e** argument.
 Each show command will creat a new worksheet.
