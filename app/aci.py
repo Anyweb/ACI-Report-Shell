@@ -85,14 +85,12 @@ def apic_logout(session):
         sys.exit()
 
 
-def show_epg_all(session):
+def show_epg_all(session, filename):
     """Show all EPGs from all Tenants
 
     Args:
         session (obj): Authentication Session from APIC login
-
-    Returns:
-        Prints dataframe with all information to CLI
+        filename (str): Filename or path to file for export
     """
     global url
     api_url = url + "node/class/fvAEPg.json"
@@ -129,6 +127,10 @@ def show_epg_all(session):
             by=["Tenant", "Application Profile", "EPG"]
         )
         print(sorted_dataframe.to_string(index=False, justify="right", col_space=8))
+        if filename != "":
+            app.util.pd_write_excel(
+                filename=filename, data=sorted_dataframe, sheet_name="EPG"
+            )
     except requests.exceptions.HTTPError as error:
         app.util.logger.error("HTTP error: " + str(error))
         app.util.logger.error("Data reported by APIC: " + str(api_call.text))

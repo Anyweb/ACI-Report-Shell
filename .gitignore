@@ -144,3 +144,5 @@ cython_debug/
 # Exclude runtime directories
 /logs/*
 !/logs/.gitkeep
+/reports/*
+!/reports/.gitkeep

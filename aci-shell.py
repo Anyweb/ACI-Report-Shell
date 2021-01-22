@@ -58,6 +58,9 @@ class ACIshell(cmd2.Cmd):
 
     # show epg all
     show_epg_all_parser = argparse.ArgumentParser()
+    show_epg_all_parser.add_argument(
+        "-e", "--export", dest="filename", help="export report to file"
+    )
     show_epg_all_args = show_epg_all_parser.parse_args()
 
     @cmd2.with_argparser(show_epg_all_parser)
@@ -65,7 +68,12 @@ class ACIshell(cmd2.Cmd):
         """ Show all EPGs from all tenants"""
         global session
         app.util.check_session(session)
-        app.aci.show_epg_all(session)
+        if args.filename is not None:
+            report_dir = app.util.read_config(section="common", setting="report_dir")
+            filename = report_dir + args.filename
+            app.aci.show_epg_all(session=session, filename=filename)
+        else:
+            app.aci.show_epg_all(session=session, filename="")
 
 
 if __name__ == "__main__":

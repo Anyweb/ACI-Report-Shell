@@ -1,9 +1,11 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
+import os
 import sys
 
 import configparser
 import coloredlogs
+import pandas
 import urllib3
 
 
@@ -39,6 +41,22 @@ def check_session(session):
         sys.exit()
     else:
         pass
+
+
+def pd_write_excel(filename, data, sheet_name):
+    """Write pandas dataframe to Excel file
+
+    Args:
+        filename (str): filename or path file
+        data (obj): pandas dataframe
+        sheet_name (str): name for Excel worksheet
+    """
+    if os.path.exists(filename):
+        write_mode = "a"
+    else:
+        write_mode = "w"
+    with pandas.ExcelWriter(path=filename, mode=write_mode) as writer:
+        data.to_excel(writer, index=False, sheet_name=sheet_name)
 
 
 # Disable unverified HTTPS request warnings
