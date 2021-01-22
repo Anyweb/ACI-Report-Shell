@@ -1,53 +1,162 @@
 # ACI Report Shell
 
-Python Code example to create Cisco ACI reports from a shell environment
+Interactive shell application to gather information generate reports from a Cisco ACI environment.
 
-![add-image-here]()
+![./assets/aci-shell.png]()
 
 ## Use Case Description
 
-Describe the problem this code addresses, how your code solves the problem, challenges you had to overcome as part of the solution, and optional ideas you have in mind that could further extend your solution.
+Working with the Cisco APIC GUI can be cumbersome at times, especially when you need a quick overview and are used to simple CLI **show** commands.
+In addition there's no sane and fast way to export data presented in the GUI to an Excel spreadsheet.
+
+This is where **ACI Report Shell** comes into play. The goal of the application is to provide some simple CLI **show** commands to the user which can be used to
+gather configuration or status information from the ACI fabric. If desired, the output from a show command can be exported to Excel. This can be helpful if you want to use the data elsewhere. For Example as an input file for configuration changes.
+
+At the moment only a few commands are available. Futer releases will inlude a larger set of commands.
 
 ## Installation
 
-Detailed instructions on how to install, configure, and get the project running. Call out any dependencies. This should be frequently tested and updated to make sure it works reliably, accounts for updated versions of dependencies, etc.
+The code is built and tested against **Python 3.8** but should also work with older 3.x versions of Python.
+
+The main dependencies are:
+
+-   cmd2
+-   coloredlogs
+-   configparser
+-   openpyxl
+-   pandas
+-   requests
+
+### With pipenv
+
+If [Pipenv](https://pipenv.pypa.io/en/latest/) is available on your system, you can install the software as follows:
+
+```bash
+pipenv install
+chmod +x ./aci-shell.py
+```
+
+### Without pipenv
+
+Otherwise you can use [Pip](https://pip.pypa.io/en/stable/user_guide/#) to install the software as follows:
+
+```bash
+pip install -r requirements.txt
+chmod +x ./aci-shell.py
+```
 
 ## Configuration
 
-If the code is configurable, describe it in detail, either here or in other documentation that you reference.
+Some aspects of the application can be configured in the [config.ini](./config.ini) file. The following settings are available:
+
+| Section  | Setting                  | Default                     | Description                                                                              |
+| -------- | ------------------------ | --------------------------- | ---------------------------------------------------------------------------------------- |
+| common   | report_dir               | ./reports                   | Path to report directory                                                                 |
+| security | ignore_https_certificate | true                        | Allow unverified HTTPS requests                                                          |
+| logging  | log_file                 | ./logs/aci-report-shell.log | Path to logfile                                                                          |
+| logging  | log_level                | Info                        | Logging level. <br> Allowed values: DEBUG, INFO, WARNING, ERROR, CRITICAL                |
+| logging  | log_rotation             | W0                          | Weekday when new logfile will be written <br> Allowed values: W0 - W6, where W0 = Monday |
+| logging  | log_backup               | 25                          | Number of log files which will be kept before they get deleted                           |
 
 ## Usage
 
-Show users how to use the code. Be specific.
-Use appropriate formatting when showing code snippets or command line output.
+To start the application simply open a terminal window an run **aci-shell.py**
+
+```bash
+$ ./aci-shell.py
+```
+
+You will the be asked to enter the FQDN of your APIC.
+
+```bash
+Enter APIC FQDN: sandboxapicdc.cisco.com
+```
+
+Once you enterd the FQDN and hit "enter" you will be presented with the welcome screen.
+
+```
+Welcome to the ACI shell
+Please login with "connect -u [username]"
+>>>
+```
+
+### General
+
+Since the application is using [cmd2](https://github.com/python-cmd2/cmd2) as the CLI, you can use the built-in features such as:
+
+-   tab completion of commands
+-   show help for a command (-h or --help)
+-   Searchable command history (history command and <Ctrl>+r)
+-   Pipe command output to shell commands with |
+-   Redirect command output to file with >, >>
+-   Command aliasing similar to bash alias command
+
+### Connect to APIC
+
+To establish a connection to the APIC use the **connect** command and provide the username with the **-u** argument.
+
+You will then be asked to enter the password for the user.
+
+```bash
+>>> connect -u admin
+APIC URL: https://sandboxapicdc.cisco.com/api/
+Enter password for user admin:
+```
+
+### Disconnect from APIC
+
+To disconnect from the APIC you can use the **disconnect** command.
+
+```bash
+>>> disconnect
+```
+
+### Show all EPGs in all Tenants
+
+For a report of all EPGs in all Tenants use the **show_epg_all** command.
+
+```bash
+>>> show_epg_all
+```
+
+### Show interface status of a switch
+
+For a report on the interface status of a switch use the **\*show_interface_status** command.
+
+```bash
+>>> show_interface_status -p1 -n 101
+```
+
+### Export report to Excel
+
+Every report can be exported to an Excel spreadsheet. Simply add the **-e** or **--export** argument to the show commands.
+
+**_Example:_**
+
+```bash
+>>> show_epg_all --export aci-report.xlsx
+```
+
+By default the report will be saved to the **./reports** directory.
+
+![./assets/excel.png]()
+
+You can save multiple reports to the same file. Simply use the same filename in the **-e** argument.
+Each show command will creat a new worksheet.
 
 ### DevNet Sandbox
 
-A great way to make your repo easy for others to use is to provide a link to a [DevNet Sandbox](https://developer.cisco.com/site/sandbox/) that provides a network or other resources required to use this code. In addition to identifying an appropriate sandbox, be sure to provide instructions and any configuration necessary to run your code with the sandbox.
-
-## How to test the software
-
-Provide details on steps to test, versions of components/dependencies against which code was tested, date the code was last tested, etc.
-If the repo includes automated tests, detail how to run those tests.
-If the repo is instrumented with a continuous testing framework, that is even better.
+To try out the application you can use the [Cisco ACI Sandbox Lab](https://sandboxapicdc.cisco.com).
+Sandbox details such as username & password can be found [here](https://devnetsandbox.cisco.com/RM/Diagram/Index/5a229a7c-95d5-4cfd-a651-5ee9bc1b30e2?diagramType=Topology).
 
 ## Known issues
 
-Document any significant shortcomings with the code. If using [GitHub Issues](https://help.github.com/en/articles/about-issues) to track issues, make that known and provide any templates or conventions to be followed when opening a new issue.
+Currently this application will not run on Windows directly. But you can use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) instead.
+Linux and macOS are supported out of the box, as long as you have Python3 installed.
 
 ## Getting help
 
-Instruct users how to get help with this code; this might include links to an issues list, wiki, mailing list, etc.
-
-**Example**
-
 If you have questions, concerns, bug reports, etc., please create an issue against this repository.
-
-## Getting involved
-
-This section should detail why people should get involved and describe key areas you are currently focusing on; e.g., trying to get feedback on features, fixing certain bugs, building important pieces, etc. Include information on how to setup a development environment if different from general installation instructions.
-
-General instructions on _how_ to contribute should be stated with a link to [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 ## Author(s)
 
