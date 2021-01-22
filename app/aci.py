@@ -49,7 +49,9 @@ def apic_login(username):
         session = requests.session()
         api_call = session.post(api_url, data=api_data, verify=False)
         api_call.raise_for_status()
-        app.util.logger.info("Successful APIC login with user " + user)
+        app.util.logger.info(
+            "Successful APIC login with user " + user + " on url " + url
+        )
         return session
     except requests.exceptions.HTTPError as error:
         app.util.logger.error("HTTP error: " + str(error))
