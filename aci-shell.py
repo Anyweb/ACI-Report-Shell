@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 import argparse
-import datetime
-import os
-import sys
-import time
 
 import cmd2
-from requests.models import guess_filename
 
 import app.util
 import app.aci
