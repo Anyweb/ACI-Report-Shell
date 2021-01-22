@@ -61,8 +61,10 @@ def pd_write_excel(filename, data, sheet_name):
 
 # Disable unverified HTTPS request warnings
 # -> https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
-ignore_https_cert = read_config(section="security", setting="ignore_https_certificate")
-if ignore_https_cert == "true":
+allow_unverified_https_request = read_config(
+    section="security", setting="allow_unverified_https_request"
+)
+if allow_unverified_https_request == "true":
     urllib3.disable_warnings()
 
 # Set log variables
