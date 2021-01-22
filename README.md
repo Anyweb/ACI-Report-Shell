@@ -1,6 +1,6 @@
 # ACI Report Shell
 
-Interactive shell application to gather information generate reports from a Cisco ACI environment.
+Interactive shell application to gather information and generate reports from a Cisco ACI environment.
 
 ![ACI-Shell Screenshot](./assets/aci-shell.png)
 
