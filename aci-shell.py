@@ -107,7 +107,7 @@ class ACIshell(cmd2.Cmd):
         else:
             print(
                 "Error: pod-id and node-id arguements are required \n"
-                'Example: "show_interface_status -p 1 -n 201"'
+                'Example: "show_interface_status -p 1 -n 101"'
             )
 
 
