@@ -12,7 +12,7 @@ In addition there's no sane and fast way to export data presented in the GUI to 
 This is where **ACI Report Shell** comes into play. The goal of the application is to provide some simple CLI **show** commands to the user which can be used to
 gather configuration or status information from the ACI fabric. If desired, the output from a show command can be exported to Excel. This can be helpful if you want to use the data elsewhere. For Example as an input file for configuration changes.
 
-At the moment only a few commands are available. Futer releases will inlude a larger set of commands.
+At the moment only a few commands are available. Future releases will include a larger set of commands.
 
 ## Installation
 
@@ -53,7 +53,7 @@ Some aspects of the application can be configured in the [config.ini](./config.i
 | -------- | ------------------------ | --------------------------- | ------------------------------------------------------------------------------------------------ |
 | common   | report_dir               | ./reports                   | Path to report directory                                                                         |
 | security | ignore_https_certificate | true                        | Allow unverified HTTPS requests                                                                  |
-| logging  | log_file                 | ./logs/aci-report-shell.log | Path to logfile                                                                                  |
+| logging  | log_file                 | ./logs/aci-report-shell.log | Path to log file                                                                                 |
 | logging  | log_level                | Info                        | Logging level. <br> Allowed values: **DEBUG**, **INFO**, **WARNING**, **ERROR**, **CRITICAL**    |
 | logging  | log_rotation             | W0                          | Weekday when new logfile will be written <br> Allowed values: **W0** - **W6**, where W0 = Monday |
 | logging  | log_backup               | 25                          | Number of log files which will be kept before they get deleted                                   |
@@ -142,7 +142,7 @@ By default the report will be saved to the **./reports** directory.
 ![Excel Screenshot](./assets/excel.png)
 
 You can save multiple reports to the same file. Simply use the same filename in the **-e** argument.
-Each show command will creat a new worksheet.
+Each show command will create a new worksheet.
 
 ### DevNet Sandbox
 
