@@ -124,7 +124,7 @@ For a report of all EPGs in all Tenants use the **show_epg_all** command.
 For a report on the interface status of a switch use the **\*show_interface_status** command.
 
 ```bash
->>> show_interface_status -p1 -n 101
+>>> show_interface_status -p 1 -n 101
 ```
 
 ### Export report to Excel
