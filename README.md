@@ -156,7 +156,7 @@ Linux and macOS are supported out of the box, as long as you have Python3 instal
 
 ## Getting help
 
-If you have questions, concerns, bug reports, etc., please create an issue against this repository.
+If you have questions, concerns, bug reports, etc., please create an [issue](https://gitlab.com/anyweb/cisco-code-exchange/aci-report-shell/-/issues) against this repository.
 
 ## Author(s)
 
