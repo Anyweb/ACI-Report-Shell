@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Report which shows all EPGs deployed on a switch interface -> **show_interface_epg**
--   Contributio instructions & Code of Conducts
+-   Contribution instructions & Code of Conduct
 
 ### Changed
 
