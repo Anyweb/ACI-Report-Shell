@@ -110,6 +110,58 @@ class ACIshell(cmd2.Cmd):
                 'Example: "show_interface_status -p 1 -n 101"'
             )
 
+    # show interface epg
+    show_interface_epg_parser = argparse.ArgumentParser()
+    show_interface_epg_parser.add_argument(
+        "-e", "--export", dest="filename", help="export report to file"
+    )
+    show_interface_epg_parser.add_argument(
+        "-p", "--pod-id", dest="pod_id", help="POD-ID"
+    )
+    show_interface_epg_parser.add_argument(
+        "-n", "--node-id", dest="node_id", help="Node-ID"
+    )
+    show_interface_epg_parser.add_argument(
+        "-i", "--interface", dest="interface", help="Interface"
+    )
+    show_interface_epg_args = show_interface_epg_parser.parse_args()
+
+    @cmd2.with_argparser(show_interface_epg_parser)
+    def do_show_interface_epg(self, args):
+        """ Show deployed EPGs on a specific fabric node interface """
+        global session
+        app.util.check_session(session)
+        if args.pod_id or args.node_id or args.interface is not None:
+            pod_id = args.pod_id
+            node_id = args.node_id
+            interface = args.interface
+            if args.filename is not None:
+                report_dir = app.util.read_config(
+                    section="common", setting="report_dir"
+                )
+                filename = report_dir + args.filename
+                app.aci.show_interface_deployed_epg(
+                    session=session,
+                    pod_id=pod_id,
+                    node_id=node_id,
+                    interface=interface,
+                    filename=filename,
+                )
+            else:
+                app.aci.show_interface_deployed_epg(
+                    session=session,
+                    pod_id=pod_id,
+                    node_id=node_id,
+                    interface=interface,
+                    filename="",
+                )
+        else:
+            print(
+                "Error: pod-id, node-id and interface arguements are"
+                "required"
+                'Example: "show_interface_epg -p 1 -n 201 - i eth1/17"'
+            )
+
 
 if __name__ == "__main__":
     application = ACIshell()

@@ -49,14 +49,14 @@ chmod +x ./aci-shell.py
 
 Some aspects of the application can be configured in the [config.ini](./config.ini) file. The following settings are available:
 
-| Section  | Setting                  | Default                     | Description                                                                                      |
-| -------- | ------------------------ | --------------------------- | ------------------------------------------------------------------------------------------------ |
-| common   | report_dir               | ./reports                   | Path to report directory                                                                         |
-| security | ignore_https_certificate | true                        | Allow unverified HTTPS requests                                                                  |
-| logging  | log_file                 | ./logs/aci-report-shell.log | Path to log file                                                                                 |
-| logging  | log_level                | Info                        | Logging level. <br> Allowed values: **DEBUG**, **INFO**, **WARNING**, **ERROR**, **CRITICAL**    |
-| logging  | log_rotation             | W0                          | Weekday when new logfile will be written <br> Allowed values: **W0** - **W6**, where W0 = Monday |
-| logging  | log_backup               | 25                          | Number of log files which will be kept before they get deleted                                   |
+| Section  | Setting                        | Default                     | Description                                                                                      |
+| -------- | ------------------------------ | --------------------------- | ------------------------------------------------------------------------------------------------ |
+| common   | report_dir                     | ./reports                   | Path to report directory                                                                         |
+| security | allow_unverified_https_request | true                        | Allow unverified HTTPS requests                                                                  |
+| logging  | log_file                       | ./logs/aci-report-shell.log | Path to log file                                                                                 |
+| logging  | log_level                      | INFO                        | Logging level. <br> Allowed values: **DEBUG**, **INFO**, **WARNING**, **ERROR**, **CRITICAL**    |
+| logging  | log_rotation                   | W0                          | Weekday when new logfile will be written <br> Allowed values: **W0** - **W6**, where W0 = Monday |
+| logging  | log_backup                     | 25                          | Number of log files which will be kept before they get deleted                                   |
 
 ## Usage
 
@@ -127,6 +127,14 @@ For a report on the interface status of a switch, use the **show_interface_statu
 >>> show_interface_status -p 1 -n 101
 ```
 
+### Show EPGs deployed on a switch interface
+
+For a report of all deployed EPGs on a switch interface, use the **show_interface_epg** command.
+
+```cli
+>>> show_interface_epg -p 1 -n 101 -i eth1/38
+```
+
 ### Export report to Excel
 
 Every report can be exported to an Excel spreadsheet. Simply add the **-e** or **--export** argument to the show commands.
@@ -156,7 +164,7 @@ Linux and macOS are supported out of the box, as long as you have Python3 instal
 
 ## Getting help
 
-If you have questions, concerns, bug reports, etc., please create an issue against this repository.
+If you have questions, concerns, bug reports, etc., please create an [issue](https://gitlab.com/anyweb/cisco-code-exchange/aci-report-shell/-/issues) against this repository.
 
 ## Author(s)
 
