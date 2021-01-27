@@ -127,6 +127,14 @@ For a report on the interface status of a switch, use the **show_interface_statu
 >>> show_interface_status -p 1 -n 101
 ```
 
+### Show EPGs deployed on a switch interface
+
+For a report of all deployed EPGs on a switch interface, use the **show_interface_epg** command.
+
+```cli
+>>> show_interface_epg -p 1 -n 101 -i eth1/38
+```
+
 ### Export report to Excel
 
 Every report can be exported to an Excel spreadsheet. Simply add the **-e** or **--export** argument to the show commands.
