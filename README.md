@@ -54,7 +54,7 @@ Some aspects of the application can be configured in the [config.ini](./config.i
 | common   | report_dir               | ./reports                   | Path to report directory                                                                         |
 | security | ignore_https_certificate | true                        | Allow unverified HTTPS requests                                                                  |
 | logging  | log_file                 | ./logs/aci-report-shell.log | Path to log file                                                                                 |
-| logging  | log_level                | Info                        | Logging level. <br> Allowed values: **DEBUG**, **INFO**, **WARNING**, **ERROR**, **CRITICAL**    |
+| logging  | log_level                | INFO                        | Logging level. <br> Allowed values: **DEBUG**, **INFO**, **WARNING**, **ERROR**, **CRITICAL**    |
 | logging  | log_rotation             | W0                          | Weekday when new logfile will be written <br> Allowed values: **W0** - **W6**, where W0 = Monday |
 | logging  | log_backup               | 25                          | Number of log files which will be kept before they get deleted                                   |
 
