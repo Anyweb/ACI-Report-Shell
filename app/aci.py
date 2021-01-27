@@ -203,3 +203,69 @@ def show_interface_status(session, pod_id, node_id, filename):
     except requests.exceptions.HTTPError as error:
         app.util.logger.error("HTTP error: " + str(error))
         app.util.logger.error("Data reported by APIC: " + str(api_call.text))
+
+
+def show_interface_deployed_epg(session, pod_id, node_id, interface, filename):
+    """Show deployed EPGs on a switch interface
+
+    Args:
+        session : (obj) Authentication session from APIC login
+        pod_id : (str) POD-ID of switch
+        node_id : (str) Node-ID of switch
+        interface : (str) Interface on desired switch
+        filename (str): Filename for export
+    """
+    global url
+    api_url = (
+        url
+        + "node/mo/topology/pod-"
+        + pod_id
+        + "/node-"
+        + node_id
+        + "/sys/phys-["
+        + interface
+        + "].json?rsp-subtree-include"
+        + "=full-deployment&target-node=all&target-path=l1EthIfToEPg"
+    )
+    try:
+        api_call = session.get(api_url, verify=False)
+        app.util.logger.info(
+            "Getting interface information for node " + node_id + " port " + interface
+        )
+        api_call.raise_for_status()
+        api_data = json.loads(api_call.text)
+        data = []
+        for imdata in api_data["imdata"]:
+            attributes = imdata["l1PhysIf"]["attributes"]
+            interface_id = attributes["id"]
+            descr = attributes["descr"]
+            try:
+                for children in imdata["l1PhysIf"]["children"]:
+                    pconsCtrlrDeployCtx = children["pconsCtrlrDeployCtx"]
+                    for children in pconsCtrlrDeployCtx["children"]:
+                        attributes = children["pconsResourceCtx"]["attributes"]
+                        ctxDn = attributes["ctxDn"]
+                        data.append(
+                            {
+                                "Node": node_id,
+                                "Port": interface_id,
+                                "Description": descr,
+                                "Deployed EPGs": ctxDn,
+                            }
+                        )
+            except Exception:
+                app.util.logger.info("No child objects found.")
+                print("No EPG deployed on this port")
+                pass
+        columns = ["Node", "Port", "Description", "Deployed EPGs"]
+        dataframe = pandas.DataFrame(data, columns=columns)
+        print(dataframe.to_string(index=False, justify="right", col_space=8))
+        if filename != "":
+            interface = interface.replace("/","_")
+            sheet_name = "interface epg_" + pod_id + "_" + node_id + "_" + interface
+            app.util.pd_write_excel(
+                filename=filename, data=dataframe, sheet_name=sheet_name
+            )
+    except requests.exceptions.HTTPError as error:
+        app.util.logger.error("HTTP error: " + str(error))
+        app.util.logger.error("Data reported by APIC: " + str(api_call.text))
