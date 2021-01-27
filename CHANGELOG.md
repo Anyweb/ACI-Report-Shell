@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2021-01-27
+
+### Added
+
+-   Report which shows all EPGs deployed on a switch interface -> **show_interface_epg**
+-   Contributio instructions & Code of Conducts
+
+### Changed
+
+-   Fixed typos in README.md
+-   Adapted LICENSE to https://choosealicense.com/licenses/bsd-3-clause/
+
 ## [1.0.0] - 2021-01-22
 
 ### Added
