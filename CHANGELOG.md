@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2021-04-30
+
+### Added
+
+- Sample Excel report
+- Python dependencies management with poetry
+- VSCode devcontainer
+- Git message template
+- Linting templates
+
+### Removed
+
+- Python dependencies management with pipenv
+
+### Security
+
+- Updated all Python dependencies to the latest version
+
 ## [1.1.0] - 2021-01-27
 
 ### Added
