@@ -1,0 +1,39 @@
+<type>: <subject>
+
+<body>
+
+<footer>
+
+####
+#
+# Allowed <type> values
+# feat
+# -> new "feature" or function
+# fix
+# -> bug fix
+# docs
+# -> changes in the documentation
+# style
+# -> formatting, spelling etc.
+# refactor
+# -> code "refactoring" e.g. renaming of variables etc.
+# test
+# -> code test units and "refactoring" of those
+# chore
+# -> everything not directly related to the code -> no production code change
+#
+# --
+#
+# <subject>
+# Short description of the change. Max. 70 characters incl. <type>:
+#
+# <body>
+# Details about the change, motivations, etc. Optional for small changes.
+# Max. 80 characters per line
+# As many lines as necessary
+#
+# <footer>
+# Reference to GitLab Issues
+# Ex: Closes #9382
+#
+####
