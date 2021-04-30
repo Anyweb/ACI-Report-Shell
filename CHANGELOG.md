@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Fixed typos in README.md
-- Adapted LICENSE to https://choosealicense.com/licenses/bsd-3-clause/
+- Adapted LICENSE to <https://choosealicense.com/licenses/bsd-3-clause/>
 
 ## [1.0.0] - 2021-01-22
 
