@@ -65,7 +65,7 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "bash ./.devcontainer/install-dev-tools.sh",
+  "postCreateCommand": "bash ./.devcontainer/install-dev-tools.sh && poetry install",
 
   // podman run-args (currently disabled since we haven't found a solution for windows users)
   // "runArgs": ["--userns=keep-id"],
