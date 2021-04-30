@@ -29,12 +29,12 @@ The main dependencies are:
 - pandas
 - requests
 
-### With pipenv
+### With poetry
 
-If [Pipenv](https://pipenv.pypa.io/en/latest/) is available on your system, you can install the software as follows:
+If [Poetry](https://python-poetry.org/) is available on your system, you can install the software as follows:
 
 ```cli
-pipenv install
+poetry install
 chmod +x ./aci-shell.py
 ```
 
