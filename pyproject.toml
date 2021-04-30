@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aci-report-shell"
-version = "1.1.0"
+version = "1.1.1"
 description = "Interactive shell application to gather information and generate reports from a Cisco ACI environment"
 authors = ["Stephan Lüscher <stephan.luescher@anyweb.ch>"]
 license = "BSD 3-Clause License"
