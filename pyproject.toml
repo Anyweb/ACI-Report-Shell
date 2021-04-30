@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "aci-report-shell"
+version = "1.1.1"
+description = "Interactive shell application to gather information and generate reports from a Cisco ACI environment"
+authors = ["Stephan Lüscher <stephan.luescher@anyweb.ch>"]
+license = "BSD 3-Clause License"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+cmd2 = "^1.5.0"
+coloredlogs = "^15.0"
+configparser = "^5.0.2"
+pandas = "^1.2.4"
+requests = "^2.25.1"
+openpyxl = "^3.0.7"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
