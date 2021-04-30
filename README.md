@@ -38,7 +38,7 @@ poetry install
 chmod +x ./aci-shell.py
 ```
 
-### Without pipenv
+### Without poetry
 
 Otherwise you can use [Pip](https://pip.pypa.io/en/stable/user_guide/#) to install the software as follows:
 
