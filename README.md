@@ -1,5 +1,7 @@
 # ACI Report Shell
 
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/Anyweb/ACI-Report-Shell)
+
 Interactive shell application to gather information and generate reports from a Cisco ACI environment.
 
 ![ACI-Shell Screenshot](./assets/aci-shell.png)
@@ -20,12 +22,12 @@ The code is built and tested against **Python 3.8** but should also work with ol
 
 The main dependencies are:
 
--   cmd2
--   coloredlogs
--   configparser
--   openpyxl
--   pandas
--   requests
+- cmd2
+- coloredlogs
+- configparser
+- openpyxl
+- pandas
+- requests
 
 ### With pipenv
 
@@ -84,12 +86,12 @@ Please login with "connect -u [username]"
 
 Since the application is using [cmd2](https://github.com/python-cmd2/cmd2) as the CLI, you can use the built-in features such as:
 
--   tab completion of commands
--   show help for a command (**-h** or **--help** command)
--   Searchable command history (**history** and **Ctrl+r** command)
--   Pipe command output to shell commands with **|**
--   Redirect command output to file with **>**, **>>**
--   Command aliasing similar to bash alias command
+- tab completion of commands
+- show help for a command (**-h** or **--help** command)
+- Searchable command history (**history** and **Ctrl+r** command)
+- Pipe command output to shell commands with **|**
+- Redirect command output to file with **>**, **>>**
+- Command aliasing similar to bash alias command
 
 ### Connect to APIC
 
@@ -170,4 +172,4 @@ If you have questions, concerns, bug reports, etc., please create an [issue](htt
 
 This project was written and is maintained by the following individuals:
 
--   Stephan Lüscher <stephan.luescher@anyweb.ch>
+- Stephan Lüscher <stephan.luescher@anyweb.ch>
