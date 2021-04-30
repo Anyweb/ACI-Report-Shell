@@ -154,6 +154,8 @@ By default the report will be saved to the **./reports** directory.
 You can save multiple reports to the same file. Simply use the same filename in the **-e** argument.
 Each show command will create a new worksheet.
 
+For demonstration purposes there's a [sample report](./reports/sample-report.xlsx) in the **reports** directory.
+
 ### DevNet Sandbox
 
 To try out the application you can use the [Cisco ACI Sandbox Lab](https://sandboxapicdc.cisco.com).
